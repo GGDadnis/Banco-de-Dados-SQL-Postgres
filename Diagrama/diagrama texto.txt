@@ -1,0 +1,80 @@
+table pedido_item{
+  id serial pk
+  item int
+  quantidade_item int
+}
+
+table pedido{
+  id serial pk
+  item_pedido int
+  data_pedido date
+  cliente_pedido int
+}
+
+table nota{
+  id serial pk
+  nota_produto int
+  nota_cliente int
+  nota_usuario int
+}
+
+table cliente{
+  id serial pk
+  nome_cliente vatchar(50)
+  usuario_cliente varchar (50)
+  email varchar(50)
+  cpf varchar(11)
+  nascimento date
+  endereco varchar(50)
+}
+
+table categoria{
+  id serial pk
+  nome varchar(50)
+  descricao_categoria varchar(100)
+}
+
+table produto{
+  id serial pk
+  nome_produto varchar(50)
+  descricao_produto varchar(50)
+  estoque int
+  fabricacao date
+  valor money
+  categoria_produto int
+  inserido_por int
+  cor varchar(20)
+}
+
+table funcionario{
+  id serial
+  nome_funcionario varchar(50)
+  cpf_funcionario varchar(11)
+}
+
+table usuario{
+  id serial
+  nome_usuario varchar(50)
+  user_usuario varchar(50)
+  email varchar(50)
+  senha varchar(50)
+  cpf varchar(11)
+  nascimento date
+  endereco varchar(50)
+}
+
+Ref: "produto"."inserido_por" < "funcionario"."id"
+
+Ref: "pedido_item"."item" < "produto"."id"
+
+Ref: "pedido"."item_pedido" < "pedido_item"."id"
+
+Ref: "pedido"."cliente_pedido" < "cliente"."id"
+
+Ref: "nota"."nota_produto" < "pedido"."id"
+
+Ref: "nota"."nota_cliente" < "cliente"."id"
+
+Ref: "nota"."nota_usuario" < "usuario"."id"
+
+Ref: "produto"."categoria_produto" < "categoria"."id"
